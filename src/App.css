@@ -1,0 +1,170 @@
+.kzui-settings {
+  max-width: 1140px;
+  padding: 100px 0;
+  width: 70%;
+  margin: auto;
+  display: flex;
+}
+
+.kzui-sidebar {
+  width: 240px;
+  height: 180px;
+  background-color: #f5f5f5;
+  padding: 10px 12px;
+  border-radius: 16px;
+  box-sizing: border-box;
+  border: 1px solid rgb(221, 221, 223);
+  border-radius: 16px;
+  box-shadow: 0px 1px 2px 0px rgba(229, 229, 230, 0.24);
+  background: rgb(255, 255, 255);
+}
+
+.kzui-menu-item {
+  margin-bottom: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.kzui-menu-item--selected {
+  border-radius: 8px;
+  background: rgb(244, 244, 245);
+}
+
+.kzui-content {
+  width: 816px;
+  height: 720px;
+  flex-grow: 1;
+  margin: 0 26px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  border: 1px solid rgb(221, 221, 223);
+  border-radius: 16px;
+}
+.kzui-Title {
+  border-bottom: 1px solid rgb(221, 221, 223);
+}
+.kzui-tabs-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(221, 221, 223);
+}
+.kzui-search {
+  display: flex;
+  align-items: center;
+  gap: 8;
+  padding: 4px 12px 4px 12px;
+  margin: 0px 376px;
+  border: 1px solid rgb(221, 221, 223);
+  border-radius: 6px;
+  background: rgb(255, 255, 255);
+}
+.kzui-search input {
+  border: none;
+  background: none;
+}
+.kzui-tabs {
+  padding: 16px 0;
+  margin-bottom: 6px;
+  display: flex;
+  gap: 10px;
+}
+
+.kzui-tab {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.kzui-tab--active {
+  font-weight: bold;
+  border-bottom: 2px solid #000;
+}
+.kzui-List-title-box{
+  border-bottom: 1px solid #ddd;
+
+}
+.kzui-List-title{
+  display:  flex;
+  width: 65%;
+  font: normal;
+  justify-content: space-between;
+}
+.kzui-color-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.kzui-color-item-box{
+  border-bottom: 1px solid #ddd;
+}
+.kzui-color-item {
+  display: flex;
+  width: 75%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+ 
+}
+
+.kzui-color-name {
+  flex-grow: 1;
+}
+
+.kzui-color-value {
+  width: 100px;
+  padding: 5px;
+  border: 1px solid #ddd;
+}
+
+.kzui-color-actions {
+  position: relative;
+}
+
+.kzui-three-dots {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.kzui-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.kzui-color-actions:hover .kzui-dropdown {
+  display: block;
+}
+
+.kzui-dropdown button {
+  display: block;
+  width: 100%;
+  padding: 5px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.kzui-add-color {
+  margin-top: 24px;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+.kzui-add-colors{
+background-color: white;
+border:1px solid black;
+  position: absolute;
+  width: 296px;
+  height: 599px;
+  left: 495px;
+  right: 25px;
+  top: 120px;
+  bottom: 1px;
+}

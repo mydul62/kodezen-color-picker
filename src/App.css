@@ -80,12 +80,11 @@
   font-weight: bold;
   border-bottom: 2px solid #000;
 }
-.kzui-List-title-box{
+.kzui-List-title-box {
   border-bottom: 1px solid #ddd;
-
 }
-.kzui-List-title{
-  display:  flex;
+.kzui-List-title {
+  display: flex;
   width: 65%;
   font: normal;
   justify-content: space-between;
@@ -95,7 +94,10 @@
   flex-direction: column;
   gap: 10px;
 }
-.kzui-color-item-box{
+.kzui-color-item-box {
+  display: flex;
+  justify-content: start;
+  align-items: center;
   border-bottom: 1px solid #ddd;
 }
 .kzui-color-item {
@@ -104,7 +106,6 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px;
- 
 }
 
 .kzui-color-name {
@@ -130,26 +131,35 @@
 .kzui-dropdown {
   display: none;
   position: absolute;
+  flex-direction: column;
+  gap: 16px;
+  padding: 2px 4px 2px 4px;
   right: 0;
   top: 100%;
   background-color: #fff;
   border: 1px solid #ccc;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
 }
 
 .kzui-color-actions:hover .kzui-dropdown {
-  display: block;
+  display: flex;
 }
 
 .kzui-dropdown button {
   display: block;
   width: 100%;
   padding: 5px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
   border: none;
   background: none;
   cursor: pointer;
 }
-
+.kzui-dropdown button:hover {
+  background: #01010116;
+}
 .kzui-add-color {
   margin-top: 24px;
   border: none;
@@ -157,14 +167,68 @@
   background: none;
 }
 
-.kzui-add-colors{
-background-color: white;
-border:1px solid black;
+.kzui-add-colors {
   position: absolute;
   width: 296px;
-  height: 599px;
+  height: 591px;
   left: 495px;
-  right: 25px;
-  top: 120px;
+  top: 127px;
   bottom: 1px;
+  padding: 20px;
+  box-sizing: border-box;
+  border-left: 1px solid rgb(221, 221, 223);
+  border-right: 1px solid rgb(221, 221, 223);
+  box-shadow: -12px 0px 24px -12px rgba(19, 25, 27, 0.08);
+  background: rgb(255, 255, 255);
+}
+
+.kzui-color-name-title {
+  color: rgba(0, 0, 0, 1);
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.kzui-color-name-selectbox {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 9px;
+  display: block;
+  border: 1px solid rgb(221, 221, 223);
+  border-radius: 8px;
+}
+.kzui-color-code {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.kzui-color-code-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.kzui-color-input {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  width: 150px;
+}
+
+.kzui-color-box {
+  width: 40px;
+  height: 20px;
+  background-color: red;
+  border-radius: 4px;
+}
+
+.kzui-color-code {
+  border: none;
+  margin-left: 8px;
+  font-family: Arial, sans-serif;
+  color: #000;
+  font-size: 14px;
 }

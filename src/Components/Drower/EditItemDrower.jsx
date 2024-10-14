@@ -1,23 +1,20 @@
 import { useState } from "react";
 import { HexColorPicker } from "react-colorful";
 
-const EditItemDrower = ({drawer,handleSetDrower,colors,setColors,itemId}) => {
-  const [color, setColor] = useState("#aabbcc");
+const EditItemDrower = ({drawer,handleSetDrower,colors,setColors,itemId,selectedColorName,setSelectedColorName,newColorValue,setNewColorValue}) => {
+  const id = parseInt(itemId-1)
+  console.log(id)
   const [showColorPicker, setShowColorPicker] = useState(false);
-  const [selectedColorName, setSelectedColorName] = useState("Black"); 
-  const [newColorValue, setNewColorValue] = useState(color); 
-  
 
+    
      const handleSaveChangeColor = () => {
       const newColor = [...colors]
-      // console.log(newColor)
-       newColor[itemId].value = newColorValue;
-       newColor[itemId].name = selectedColorName;
-      console.log(newColor)
+       newColor[id].value = newColorValue;
+       newColor[id].name = selectedColorName;
+      setColors([...newColor])
      };
   return (
     <div className={`kzui-add-colors ${drawer ? "showdrower" : "hidedrower"}`}>
-        {/* <EditItem drawer={editDrawer} handleSetDrower={handleSetDrower} ></EditItem> */}
           <div>
             <h6 className="kzui-color-name-title">Name</h6>
             <select
@@ -26,6 +23,7 @@ const EditItemDrower = ({drawer,handleSetDrower,colors,setColors,itemId}) => {
               onChange={(e) => setSelectedColorName(e.target.value)}
             >
               <option value="Black">Black</option>
+              <option value="Color 100">Color</option>
               <option value="Color 100">Color 100</option>
               <option value="Primary">Primary</option>
               <option value="Secondary">Secondary</option>

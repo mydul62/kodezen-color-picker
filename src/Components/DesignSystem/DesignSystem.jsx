@@ -12,17 +12,20 @@ import "./Design.css"
 import AddItemDrower from "../Drower/AddItemDrower";
 import EditItemDrower from "../Drower/EditItemDrower";
 const DesignSystem = () => {
-  const [editDrawer, setEditDrawer] = useState(false);
-  const [drawer, setDrawer] = useState(false);
-  const [show, setShow] = useState(false);
-  const [color, setColor] = useState("#aabbcc");
-  const [itemId,setItemId] = useState();
-  const [colors, setColors] = useState([
+ const [colors, setColors] = useState([
     { id: 1, name: "Black", value: "#000000" },
     { id: 2, name: "Color 100", value: "#FFFFFF" },
     { id: 3, name: "Primary", value: "#1568ED" },
     { id: 4, name: "Secondary", value: "#ED1976" }
   ]);
+  const [editDrawer, setEditDrawer] = useState(false);
+  const [drawer, setDrawer] = useState(false);
+  const [show, setShow] = useState(false);
+  const [itemId,setItemId] = useState();
+  const id = parseInt(itemId)
+  const [selectedColorName, setSelectedColorName] = useState(); 
+  const [newColorValue, setNewColorValue] = useState(); 
+ 
 
   const handleDelete = (id) => {
     setColors(colors.filter((color) => color.id !== id));
@@ -79,20 +82,22 @@ const DesignSystem = () => {
           </div>
         </div>
         <div className="kzui-List-title-box">
-          <div className="kzui-List-title">
-            <p>Colors</p>
+          <div className="kzui-color-item">
+            <p className="">Colors</p>
             <p>Value</p>
+            <div></div>
           </div>
         </div>
 
         <div className="kzui-color-list">
           {colors.map((color) => (
             <div key={color.id} className="kzui-color-item-box">
-              <div>
-                <RxDragHandleDots2 />
-              </div>
+              
               <div className="kzui-color-item">
+              <div className="kzui-color-title">
+                <span className="kzui-drag_icon"><RxDragHandleDots2  /></span>
                 <span className="kzui-color-name">{color.name}</span>
+              </div>                      
                 <div className="kzui-color-input">
                   <div
                     style={{
@@ -108,7 +113,7 @@ const DesignSystem = () => {
                   />
                 </div>
                 <div className="kzui-color-actions">
-                  <button
+                  <button 
                     onClick={() => setShow(true)}
                     className="kzui-three-dots"
                   >
@@ -118,6 +123,11 @@ const DesignSystem = () => {
                     <button onClick={()=>{
                     setEditDrawer(true)
                     setItemId(color.id)
+                    setNewColorValue(color.value)
+                    console.log(color.value)
+                    setSelectedColorName(color.name)
+                    
+                    console.log(color.name)
                     }}>
                       <PiPencilThin /> <span>Edit</span>
                     </button>
@@ -139,7 +149,7 @@ const DesignSystem = () => {
           + Add Color
         </button>
         <AddItemDrower drawer={drawer} handleSetDrower={handleSetDrower} colors={colors} setColors={setColors}></AddItemDrower>
-        <EditItemDrower drawer={editDrawer} handleSetDrower={handleSetEditDrower} colors={colors} itemId={itemId}  ></EditItemDrower>
+        <EditItemDrower drawer={editDrawer} handleSetDrower={handleSetEditDrower} colors={colors} setColors={setColors} itemId={itemId} setNewColorValue={setNewColorValue} newColorValue={newColorValue} setSelectedColorName={setSelectedColorName} selectedColorName={selectedColorName} ></EditItemDrower>
 
       </div>
     </div>

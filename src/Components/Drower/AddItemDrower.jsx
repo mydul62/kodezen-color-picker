@@ -17,6 +17,7 @@ const AddItemDrower = ({drawer,handleSetDrower,colors,setColors}) => {
     // setDrawer(false); // Close the drawer after saving
     setNewColorValue(color); // Reset the new color value
     setSelectedColorName("Black"); // Reset the selected color name
+    handleSetDrower()
   };
   return (
     <div className={`kzui-add-colors ${drawer ? "showdrower" : "hidedrower"}`}>

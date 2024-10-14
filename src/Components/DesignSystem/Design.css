@@ -100,14 +100,38 @@
   align-items: center;
   border-bottom: 1px solid #ddd;
 }
+.kzui-color-item-box:hover {
+  background-color: #f4f4f5;
+}
+.kzui-three-dots {
+  box-sizing: border-box;
+  border: 1px solid rgb(221, 221, 223);
+  border-radius: 4px;
+  background: rgb(255, 255, 255);
+  cursor: pointer;
+  padding: 4px;
+  display: none; /* Initially hidden */
+}
+.kzui-drag_icon{
+  display: none;
+  }
+.kzui-color-item-box:hover .kzui-three-dots ,.kzui-color-item-box:hover .kzui-drag_icon {
+  display: block; /* Show when hovering over parent */
+}
 .kzui-color-item {
   display: flex;
-  width: 75%;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
 }
-
+.kzui-color-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+}
 .kzui-color-name {
   flex-grow: 1;
 }
@@ -119,13 +143,10 @@
 }
 
 .kzui-color-actions {
+  display: flex;
+  justify-content: end;
+  width: 15%;
   position: relative;
-}
-
-.kzui-three-dots {
-  background: none;
-  border: none;
-  cursor: pointer;
 }
 
 .kzui-dropdown {
@@ -141,7 +162,7 @@
   border-radius: 6px;
 }
 
-.kzui-color-actions:hover .kzui-dropdown {
+.kzui-color-actions:hover .kzui-dropdown  {
   display: flex;
 }
 
@@ -235,19 +256,19 @@
   color: #000;
   font-size: 14px;
 }
-.showdrower{
-display: flex !important;
+.showdrower {
+  display: flex !important;
 }
-.hidedrower{
-display: none !important;;
+.hidedrower {
+  display: none !important;
 }
-.kzui-action-btns{
-display: flex;
-flex-direction: row;
-gap: 10px;
-justify-content: space-between;
+.kzui-action-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-between;
 }
-.kzui-btn-white{
+.kzui-btn-white {
   border: 1px solid rgb(221, 221, 223);
   border-radius: 8px;
   background-color: #fff;
@@ -255,7 +276,7 @@ justify-content: space-between;
   color: #000;
   padding: 8px 20px 8px 20px;
 }
-.kzui-btn-black{
+.kzui-btn-black {
   border: 1px solid rgb(221, 221, 223);
   border-radius: 8px;
   background-color: #000;
@@ -263,19 +284,19 @@ justify-content: space-between;
   color: #fff;
   padding: 8px 20px 8px 20px;
 }
-.kzui-btn-white:hover{
- background-color: black;
- color: white;
+.kzui-btn-white:hover {
+  background-color: black;
+  color: white;
 }
-.kzui-btn-white:hover + .kzui-btn-black{
+.kzui-btn-white:hover + .kzui-btn-black {
   background-color: #fff;
   color: #000;
 }
-.kzui-btn-black:hover{
- background-color: white;
- color: black;
+.kzui-btn-black:hover {
+  background-color: white;
+  color: black;
 }
-.kzui-btn-black:hover + .kzui-btn-white{
+.kzui-btn-black:hover + .kzui-btn-white {
   background-color: #000;
   color: #fff;
 }

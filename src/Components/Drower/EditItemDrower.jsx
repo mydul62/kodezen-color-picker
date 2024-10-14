@@ -1,23 +1,20 @@
 import { useState } from "react";
 import { HexColorPicker } from "react-colorful";
 
-const AddItemDrower = ({drawer,handleSetDrower,colors,setColors}) => {
+const EditItemDrower = ({drawer,handleSetDrower,colors,setColors,itemId}) => {
   const [color, setColor] = useState("#aabbcc");
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [selectedColorName, setSelectedColorName] = useState("Black"); 
   const [newColorValue, setNewColorValue] = useState(color); 
   
-  const handleSaveNewColor = () => {
-    const newColor = {
-      id: colors.length + 1,
-      name: selectedColorName,
-      value: newColorValue,
-    };
-    setColors([...colors, newColor]);
-    // setDrawer(false); // Close the drawer after saving
-    setNewColorValue(color); // Reset the new color value
-    setSelectedColorName("Black"); // Reset the selected color name
-  };
+
+     const handleSaveChangeColor = () => {
+      const newColor = [...colors]
+      // console.log(newColor)
+       newColor[itemId].value = newColorValue;
+       newColor[itemId].name = selectedColorName;
+      console.log(newColor)
+     };
   return (
     <div className={`kzui-add-colors ${drawer ? "showdrower" : "hidedrower"}`}>
         {/* <EditItem drawer={editDrawer} handleSetDrower={handleSetDrower} ></EditItem> */}
@@ -73,13 +70,13 @@ const AddItemDrower = ({drawer,handleSetDrower,colors,setColors}) => {
               Cancel
             </button>
             <button 
-            onClick={handleSaveNewColor}
+            onClick={handleSaveChangeColor}
             className="kzui-btn-black">
-              Save
+              Save Changes
             </button>
           </div>
         </div>
   );
 };
 
-export default AddItemDrower;
+export default EditItemDrower;

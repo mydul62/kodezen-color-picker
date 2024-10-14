@@ -9,15 +9,14 @@ import React, { useState } from "react";
 // import { arrayMoveImmutable } from "array-move";
 import {DragDropContext,Droppable} from "react-beautiful-dnd"
 import "./Design.css"
+import AddItemDrower from "../Drower/AddItemDrower";
+import EditItemDrower from "../Drower/EditItemDrower";
 const DesignSystem = () => {
-  const [show, setShow] = useState(false);
+  const [editDrawer, setEditDrawer] = useState(false);
   const [drawer, setDrawer] = useState(false);
-  const [editDrawer, setEditDrawer] = useState(true);
+  const [show, setShow] = useState(false);
   const [color, setColor] = useState("#aabbcc");
-  const [showColorPicker, setShowColorPicker] = useState(false);
-  const [selectedColorName, setSelectedColorName] = useState("Black"); // New state for selected color name
-  const [newColorValue, setNewColorValue] = useState(color); // New state for new color value
-
+  const [itemId,setItemId] = useState();
   const [colors, setColors] = useState([
     { id: 1, name: "Black", value: "#000000" },
     { id: 2, name: "Color 100", value: "#FFFFFF" },
@@ -41,20 +40,13 @@ const DesignSystem = () => {
     ]);
   };
 
-  const handleSaveNewColor = () => {
-    const newColor = {
-      id: colors.length + 1,
-      name: selectedColorName,
-      value: newColorValue,
-    };
-    setColors([...colors, newColor]);
-    setDrawer(false); // Close the drawer after saving
-    setNewColorValue(color); // Reset the new color value
-    setSelectedColorName("Black"); // Reset the selected color name
-  };
+
   
    const handleSetDrower=()=>{
-     setDrawer(!drawer)
+     setDrawer(false)
+   }
+   const handleSetEditDrower=()=>{
+     setEditDrawer(false)
    }
   return (
     <div className="kzui-settings">
@@ -123,9 +115,11 @@ const DesignSystem = () => {
                     <BsThreeDots size={14} />
                   </button>
                   <div className={`kzui-dropdown`}>
-                    <button onClick={()=>setEditDrawer(true)}>
+                    <button onClick={()=>{
+                    setEditDrawer(true)
+                    setItemId(color.id)
+                    }}>
                       <PiPencilThin /> <span>Edit</span>
-                      
                     </button>
                     <button onClick={() => handleDuplicate(color.id)}>
                       <HiOutlineDuplicate size={14} /> <span>Duplicate</span>
@@ -144,64 +138,9 @@ const DesignSystem = () => {
         <button onClick={() => setDrawer(true)} className="kzui-add-color">
           + Add Color
         </button>
-        <div className={`kzui-add-colors ${drawer ? "showdrower" : "hidedrower"}`}>
-        {/* <EditItem drawer={editDrawer} handleSetDrower={handleSetDrower} ></EditItem> */}
-          <div>
-            <h6 className="kzui-color-name-title">Name</h6>
-            <select
-              className="kzui-color-name-selectbox"
-              value={selectedColorName}
-              onChange={(e) => setSelectedColorName(e.target.value)}
-            >
-              <option value="Black">Black</option>
-              <option value="Color 100">Color 100</option>
-              <option value="Primary">Primary</option>
-              <option value="Secondary">Secondary</option>
-              <option value="Title Text">Title Text</option>
-              <option value="Supporting Text">Supporting Text</option>
-            </select>
-            <div className="kzui-color-code">
-              <h6 className="kzui-color-name-title">Value</h6>
-            </div>
-            <div className="kzui-color-code">
-              <p>Color</p>
-              <div
-                onMouseOut={() => setShowColorPicker(false)}
-                onMouseOver={() => setShowColorPicker(true)}
-                className="kzui-color-input"
-              >
-                <div
-                  style={{
-                    backgroundColor: newColorValue,
-                  }}
-                  className="kzui-color-box"
-                >
-                  {showColorPicker && (
-                    <HexColorPicker
-                      style={{ marginTop: "25px" }}
-                      color={newColorValue}
-                      onChange={setNewColorValue}
-                    />
-                  )}
-                </div>
-                <input
-                  type="text"
-                  readOnly
-                  value={newColorValue}
-                  className="kzui-color-code"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="kzui-action-btns">
-            <button onClick={() => setDrawer(false)} className="kzui-btn-white">
-              Cancel
-            </button>
-            <button onClick={handleSaveNewColor} className="kzui-btn-black">
-              Save
-            </button>
-          </div>
-        </div>
+        <AddItemDrower drawer={drawer} handleSetDrower={handleSetDrower} colors={colors} setColors={setColors}></AddItemDrower>
+        <EditItemDrower drawer={editDrawer} handleSetDrower={handleSetEditDrower} colors={colors} itemId={itemId}  ></EditItemDrower>
+
       </div>
     </div>
   );

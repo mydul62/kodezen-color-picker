@@ -4,18 +4,17 @@ import { BsThreeDots } from "react-icons/bs";
 import { PiPencilThin } from "react-icons/pi";
 import { HiOutlineDuplicate } from "react-icons/hi";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { HexColorPicker } from "react-colorful";
 import "./App.css";
 import React, { useState } from "react";
-import {
-  SortableContainer,
-  SortableElement,
-  SortableHandle,
-} from "react-sortable-hoc";
 import { arrayMoveImmutable } from "array-move";
 
 const ColorTab = () => {
   const [show, setShow] = useState(false);
-  const [drower, setDrower] = useState(false);
+  const [drower, setDrower] = useState(true);
+  const [color, setColor] = useState("#aabbcc");
+  const [showColorPicker, setShowCOlorPicker] = useState(false);
+  
   const [colors, setColors] = useState([
     { id: 1, name: "Black", value: "#000000" },
     { id: 2, name: "Color 100", value: "#FFFFFF" },
@@ -36,11 +35,11 @@ const ColorTab = () => {
       {
         ...colorToDuplicate,
         id: colors.length + 1,
-        name: `${colorToDuplicate.name} Copy`,
+        name: `${colorToDuplicate.name}`,
       },
     ]);
   };
-
+ console.log(color)
   return (
     <div className="kzui-settings">
       <div className="kzui-sidebar">
@@ -83,11 +82,18 @@ const ColorTab = () => {
               </div>
               <div className="kzui-color-item">
                 <span className="kzui-color-name">{color.name}</span>
+                <div className="kzui-color-input">
+                <div style={{
+                backgroundColor:'red',
+                }} className="kzui-color-box"></div>
                 <input
-                  className="kzui-color-value"
-                  value={color.value}
+                  type="text"
+                  value="#3891FA"
                   readOnly
+                  className="kzui-color-code"
                 />
+                
+              </div>
                 <div className="kzui-color-actions">
                   <button
                     onClick={() => setShow(true)}
@@ -114,10 +120,11 @@ const ColorTab = () => {
           ))}
         </div>
 
-        <button className="kzui-add-color">+ Add Color</button>
-        <div className="kzui-add-colors">
-          <h6 className="kzui-color-name-title">Name</h6>
+        <button onClick={()=>setDrower(true)} className="kzui-add-color">+ Add Color</button>
+        <div className={`kzui-add-colors ${drower?'showdrower':'hidedrower'}`} >
+         
           <div>
+          <h6 className="kzui-color-name-title">Name</h6>
             <select name="" id="" className="kzui-color-name-selectbox ">
               <option value="">Black</option>
               <option value="">Color 100</option>
@@ -132,16 +139,22 @@ const ColorTab = () => {
             </div>
             <div className=" kzui-color-code">
               <p>Color</p>
-              <div className="kzui-color-input">
-                <div className="kzui-color-box"></div>
+              <div  onMouseOut={()=>setShowCOlorPicker(false)} onMouseOver={()=>setShowCOlorPicker(true)}  className="kzui-color-input">
+                <div style={{
+                backgroundColor:`${color}`,
+                }} className="kzui-color-box">{showColorPicker && <HexColorPicker  style={{marginTop:'25px'}} className="" color={color} onChange={setColor} />}</div>
                 <input
                   type="text"
-                  value="#3891FA"
                   readOnly
+                  value={color}
                   className="kzui-color-code"
                 />
               </div>
             </div>
+          </div>
+          <div className="kzui-action-btns">
+          <button onClick={()=>setDrower(false)} className="kzui-btn-white">Cencel</button>
+          <button className=" kzui-btn-black">Save</button>
           </div>
         </div>
       </div>

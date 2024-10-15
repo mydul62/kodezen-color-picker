@@ -59,20 +59,16 @@
   border-bottom: 1px solid rgb(221, 221, 223);
 }
 .kzui-search {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  flex-grow: 1;
-  gap: 8;
-  padding: 4px 0px 4px 12px;
-  margin: 0px 376px;
-  border: 1px solid rgb(221, 221, 223);
-  border-radius: 6px;
-  background: rgb(255, 255, 255);
+  display: "flex";
+  border: "1px solid #ccc";
+  padding:'5px';
+  border-radius: '5px';
 }
-.kzui-search input {
+.kzui-search_input{
   border: none;
   background: none;
+  box-sizing: border-box;
+
 }
 .kzui-tabs {
   padding: 16px 0;
@@ -202,7 +198,21 @@
   border: 1px solid #ccc;
   border-radius: 6px;
 }
-
+.kzui-group-dropdown{
+  display: none;
+  position: absolute;
+  flex-direction: column;
+  gap: 16px;
+  padding: 2px 4px 2px 4px;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.kzui-group-dots:hover + .kzui-group-dropdown{
+  display: flex;
+}
 .kzui-color-actions:hover .kzui-dropdown {
   display: flex;
 }
@@ -306,7 +316,6 @@
   color: #000;
   padding: 4px;
   font-size: 14px;
-  border-left: 1px solid rgb(221, 222, 223);
 }
 .showdrower {
   display: flex !important;

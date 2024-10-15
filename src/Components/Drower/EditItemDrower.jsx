@@ -11,6 +11,7 @@ const EditItemDrower = ({drawer,handleSetDrower,colors,setColors,itemId,selected
        newColor[id].value = newColorValue;
        newColor[id].name = selectedColorName;
       setColors([...newColor])
+      handleSetDrower()
      };
   return (
     <div className={`kzui-add-colors ${drawer ? "showdrower" : "hidedrower"}`}>

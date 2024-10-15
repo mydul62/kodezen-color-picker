@@ -44,7 +44,7 @@
   min-height: 720px;
   flex-grow: 1;
   margin: 0 26px;
-  padding: 0 16px;
+  padding: 0 25px;
   box-sizing: border-box;
   border: 1px solid rgb(221, 221, 223);
   border-radius: 16px;
@@ -114,17 +114,18 @@
 .kzui-color-list {
   display: flex;
   flex-direction: column;
-
 }
 .kzui-color-item-box {
   display: flex;
   width: 100%;
   justify-content: start;
+  padding: 0 7px;
   align-items: center;
   border-bottom: 1px solid #ddd;
 }
 .kzui-color-item-box:hover {
   background-color: #f4f4f5;
+  border-radius: 6px;
 }
 .kzui-three-dots {
   box-sizing: border-box;
@@ -141,16 +142,20 @@
   justify-content: space-between;
 }
 .kzui-drag_icon {
-  width: 2%;
+  position: absolute;
+  left: 8px;
+  width: 3%;
   display: none;
-  cursor: pointer;
 }
 
 .kzui-color-item-box:hover .kzui-three-dots {
   display: block;
 }
-.kzui-item-continer:hover  .kzui-drag_icon {
+.kzui-item-continer:hover .kzui-drag_icon {
   display: block;
+}
+.kzui-item-continer:hover .kzui-color_plet_icon {
+  display: none;
 }
 .kzui-color-item {
   display: flex;
@@ -282,11 +287,16 @@
 }
 
 .kzui-color-box {
-  width: 28px;
-  height: 24px;
-  border-radius: 4px 0 0 4px;
+  width: 24px;
+  height: 20px;
+  border-radius: 4px;
   box-sizing: border-box;
-  border-right: 1px solid rgb(221, 222, 223);
+  margin: 4px;
+  margin-right: 0px;
+  box-sizing: border-box;
+  border: 1px solid rgb(221, 221, 223);
+  border-radius: 4px;
+  background: rgb(237, 25, 118);
 }
 
 .kzui-color-code {
@@ -296,6 +306,7 @@
   color: #000;
   padding: 4px;
   font-size: 14px;
+  border-left: 1px solid rgb(221, 222, 223);
 }
 .showdrower {
   display: flex !important;
@@ -308,6 +319,8 @@
   flex-direction: row;
   gap: 10px;
   justify-content: space-between;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
 }
 .kzui-btn-white {
   border: 1px solid rgb(221, 221, 223);

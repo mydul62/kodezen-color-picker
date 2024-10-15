@@ -131,7 +131,7 @@ const DesignSystem = () => {
                       >
                         <div
                           className="kzui-drag_icon"
-                          {...provided.dragHandleProps} // Only drag using this icon
+                          {...provided.dragHandleProps}
                         >
                           <RxDragHandleDots2 />
                         </div>
@@ -140,13 +140,13 @@ const DesignSystem = () => {
                           <div className="kzui-color-item">
                             <div className="kzui-color-title">
                               <span className="kzui-color-plet">
-                                <IoColorPaletteOutline />
                                 <input
                                   type="checkbox"
                                   value={color.id}
                                   onChange={() => handleCheckboxChange(color.id)}
                                   checked={selectedColors.includes(color.id)}
                                 />
+                                
                               </span>
                               <span className="kzui-color-name">{color.name}</span>
                             </div>

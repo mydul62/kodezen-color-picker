@@ -41,6 +41,7 @@ const AddItemDrower = ({drawer,handleSetDrower,colors,setColors}) => {
             </div>
             <div className="kzui-color-code">
               <p>Color</p>
+              
               <div
                 onMouseOut={() => setShowColorPicker(false)}
                 onMouseOver={() => setShowColorPicker(true)}
@@ -49,15 +50,17 @@ const AddItemDrower = ({drawer,handleSetDrower,colors,setColors}) => {
                 <div
                   style={{
                     backgroundColor: newColorValue,
+                    position: "relative",
                   }}
                   className="kzui-color-box"
                 >
                   {showColorPicker && (
-                    <HexColorPicker
-                      style={{ marginTop: "25px" }}
+                    <div 
+                    style={{ marginTop: "25px", position: "absolute", top:0  }}>
+             <HexColorPicker
                       color={newColorValue}
                       onChange={setNewColorValue}
-                    />
+                    /></div>
                   )}
                 </div>
                 <input

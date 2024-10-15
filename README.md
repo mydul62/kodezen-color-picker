@@ -1,8 +1,6 @@
-# React + Vite
+ 
+Live Link : https://kodezen.vercel.app/
+Github Link : https://github.com/mydul62/kodezen-color-picker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+I have completed the task as per the requirements. The attached files include the React component implementation based on the Figma design, following the requested BEM naming conventions and pixel-perfect UI without using CSS libraries like Tailwind or Bootstrap. 
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

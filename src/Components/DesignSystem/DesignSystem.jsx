@@ -31,6 +31,7 @@ const DesignSystem = () => {
   const [newColorValue, setNewColorValue] = useState();
   const [selectedColors, setSelectedColors] = useState([]);
   const [colorGroups, setColorGroups] = useState([]);
+  const [grupeId, setGroupId] = useState('');
   const [openMenuId, setOpenMenuId] = useState(null); // To track which menu is open
   const handleCheckboxChange = (id) => {
     if (selectedColors.includes(id)) {
@@ -289,7 +290,7 @@ const DesignSystem = () => {
         </button>
         {/* ------------------------- */}
         <div className="kzui-color-groups">
-          {colorGroups.map((group, index) => (
+          {colorGroups.map((group) => (
             <div key={group.groupId} className="kzui-color-group">
               <div className="kzui-grupe-title">
                 <h3>{group.groupName}</h3>
@@ -304,6 +305,7 @@ const DesignSystem = () => {
                     <button
                     onClick={()=>{
                     setModal(true);
+                    setGroupId(group.groupId);
                     }}
                     >
                       <PiPencilThin /> <span>Rename</span>
@@ -398,7 +400,7 @@ const DesignSystem = () => {
           handleCreateGroup={handleCreateGroup}
         ></ItemCart>
       </div>
-      <ChangeGruopName modal={modal} handleCloseModal={handleCloseModal} ></ChangeGruopName>
+      <ChangeGruopName modal={modal} handleCloseModal={handleCloseModal} colorGroups={colorGroups} setColorGroups={setColorGroups} Id={grupeId} ></ChangeGruopName>
     </div>
   );
 };

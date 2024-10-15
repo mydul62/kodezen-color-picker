@@ -1,15 +1,26 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 
-const ChangeGroupName = ({ modal, handleCloseModal, handleChangeGroupName }) => {
+const ChangeGroupName = ({ modal, handleCloseModal, setColorGroups, colorGroups,Id }) => {
   const [groupName, setGroupName] = useState("");
-
+  
   const handleInputChange = (e) => {
     setGroupName(e.target.value); 
   };
 
+
   const handleSubmit = () => {
-    console.log(groupName);
-  }
+     console.log(groupName)
+    const updatedGroups = colorGroups.map((group) => {
+      if (group.groupId === Id) {
+        return { ...group, groupName };
+      }
+      return group;
+    });
+    console.log(updatedGroups)
+    setColorGroups(updatedGroups); 
+    handleCloseModal(); 
+  };
 
   return (
     <div className={` ${modal ? 'kzui-modal' : 'kzui-modal_hide'} `}>
@@ -23,7 +34,7 @@ const ChangeGroupName = ({ modal, handleCloseModal, handleChangeGroupName }) => 
           <input
             type="text"
             id="groupName"
-            placeholder="Write changed group name"
+            placeholder="Write new group name"
             className="kzui-modal-input"
             value={groupName}     
             onChange={handleInputChange} 

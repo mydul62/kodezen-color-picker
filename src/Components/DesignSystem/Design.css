@@ -137,7 +137,7 @@
   border-radius: 4px;
   background: rgb(255, 255, 255);
   cursor: pointer;
-  padding: 4px;
+  padding: 2px;
   display: inline-block;
   
 }
@@ -388,6 +388,9 @@
 }
 .kzui-grupe-title {
   box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
   border-bottom: 1px solid rgb(222, 222, 222);
 }
 

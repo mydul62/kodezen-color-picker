@@ -4,13 +4,14 @@ import { BsThreeDots } from "react-icons/bs";
 import { PiPencilThin } from "react-icons/pi";
 import { HiOutlineDuplicate } from "react-icons/hi";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { HexColorPicker } from "react-colorful";
+import { IoColorPaletteOutline } from "react-icons/io5";
 import React, { useState } from "react";
 // import { arrayMoveImmutable } from "array-move";
 import {DragDropContext,Droppable} from "react-beautiful-dnd"
 import "./Design.css"
 import AddItemDrower from "../Drower/AddItemDrower";
 import EditItemDrower from "../Drower/EditItemDrower";
+import ItemCart from "../ItemCart/ItemCart";
 const DesignSystem = () => {
  const [colors, setColors] = useState([
     { id: 1, name: "Black", value: "#000000" },
@@ -18,14 +19,28 @@ const DesignSystem = () => {
     { id: 3, name: "Primary", value: "#1568ED" },
     { id: 4, name: "Secondary", value: "#ED1976" }
   ]);
+
   const [editDrawer, setEditDrawer] = useState(false);
   const [drawer, setDrawer] = useState(false);
-  const [show, setShow] = useState(false);
   const [itemId,setItemId] = useState();
-  const id = parseInt(itemId)
   const [selectedColorName, setSelectedColorName] = useState(); 
   const [newColorValue, setNewColorValue] = useState(); 
- 
+  const [selectedColors, setSelectedColors] = useState([]); 
+  const [colorGroups, setColorGroups] = useState([]);
+  
+  const handleCheckboxChange = (id) => {
+    if (selectedColors.includes(id)) {
+      setSelectedColors(selectedColors.filter((colorId) => colorId !== id));
+    } else {
+      setSelectedColors([...selectedColors, id]);
+    }
+  };
+
+  const handleCreateGroup = () => {
+    const groupedColors = colors.filter((color) => selectedColors.includes(color.id));
+    setColorGroups([...colorGroups, groupedColors]);
+    setSelectedColors([]); 
+  };
 
   const handleDelete = (id) => {
     setColors(colors.filter((color) => color.id !== id));
@@ -91,11 +106,22 @@ const DesignSystem = () => {
 
         <div className="kzui-color-list">
           {colors.map((color) => (
-            <div key={color.id} className="kzui-color-item-box">
+           <div key={color.id} className="kzui-item-continer" >
+           <div className="kzui-drag_icon"><RxDragHandleDots2  /></div>
+            
+            <div className="kzui-color-item-box">
               
               <div className="kzui-color-item">
               <div className="kzui-color-title">
-                <span className="kzui-drag_icon"><RxDragHandleDots2  /></span>
+                
+                <span className="kzui-color-plet"><IoColorPaletteOutline />
+                <input
+                        type="checkbox"
+                        value={color.id}
+                        onChange={() => handleCheckboxChange(color.id)}
+                        checked={selectedColors.includes(color.id)}
+                      />
+                </span>
                 <span className="kzui-color-name">{color.name}</span>
               </div>                      
                 <div className="kzui-color-input">
@@ -142,15 +168,100 @@ const DesignSystem = () => {
                 </div>
               </div>
             </div>
+           </div>
           ))}
         </div>
 
         <button onClick={() => setDrawer(true)} className="kzui-add-color">
           + Add Color
         </button>
+        {/* ------------------------- */}
+        <div className="kzui-color-groups">
+          {colorGroups.map((group, index) => (
+            <div key={index} className="kzui-color-group">
+             <div className="kzui-grupe-title">
+             <h3>New Group</h3>
+             </div>
+              {group.map((color) => (
+                <div key={color.id} className="kzui-item-continer" >
+                <div className="kzui-drag_icon"><RxDragHandleDots2  /></div>
+                 
+                 <div className="kzui-color-item-box">
+                   
+                   <div className="kzui-color-item">
+                   <div className="kzui-color-title">
+                     
+                     <span className="kzui-color-plet"><IoColorPaletteOutline />
+                     </span>
+                     <span className="kzui-color-name">{color.name}</span>
+                   </div>                      
+                     <div className="kzui-color-input">
+                       <div
+                         style={{
+                           backgroundColor: color.value,
+                         }}
+                         className="kzui-color-box"
+                       ></div>
+                       <input
+                         type="text"
+                         value={color.value}
+                         readOnly
+                         className="kzui-color-code"
+                       />
+                     </div>
+                     <div className="kzui-color-actions">
+                       <button 
+                         onClick={() => setShow(true)}
+                         className="kzui-three-dots"
+                       >
+                         <BsThreeDots size={14} />
+                       </button>
+                       <div className={`kzui-dropdown`}>
+                         <button onClick={()=>{
+                         setEditDrawer(true)
+                         setItemId(color.id)
+                         setNewColorValue(color.value)
+                         console.log(color.value)
+                         setSelectedColorName(color.name)
+                         
+                         console.log(color.name)
+                         }}>
+                           <PiPencilThin /> <span>Edit</span>
+                         </button>
+                         <button onClick={() => handleDuplicate(color.id)}>
+                           <HiOutlineDuplicate size={14} /> <span>Duplicate</span>
+                         </button>
+                         <button onClick={() => handleDelete(color.id)}>
+                           <RiDeleteBin6Line size={14} />
+                           <span>Delete</span>
+                         </button>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        <AddItemDrower drawer={drawer} handleSetDrower={() => setDrawer(false)} colors={colors} setColors={setColors} />
+        <EditItemDrower
+          drawer={editDrawer}
+          handleSetDrower={() => setEditDrawer(false)}
+          colors={colors}
+          setColors={setColors}
+          itemId={itemId}
+          newColorValue={newColorValue}
+          setNewColorValue={setNewColorValue}
+          selectedColorName={selectedColorName}
+          setSelectedColorName={setSelectedColorName}
+        />
+        {/* ------------------------------ */}
         <AddItemDrower drawer={drawer} handleSetDrower={handleSetDrower} colors={colors} setColors={setColors}></AddItemDrower>
         <EditItemDrower drawer={editDrawer} handleSetDrower={handleSetEditDrower} colors={colors} setColors={setColors} itemId={itemId} setNewColorValue={setNewColorValue} newColorValue={newColorValue} setSelectedColorName={setSelectedColorName} selectedColorName={selectedColorName} ></EditItemDrower>
-
+        <ItemCart count={selectedColors.length} setSelectedColors={setSelectedColors} handleCreateGroup={handleCreateGroup}  ></ItemCart>
       </div>
     </div>
   );

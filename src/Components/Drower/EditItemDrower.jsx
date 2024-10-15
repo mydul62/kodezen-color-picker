@@ -3,7 +3,6 @@ import { HexColorPicker } from "react-colorful";
 
 const EditItemDrower = ({drawer,handleSetDrower,colors,setColors,itemId,selectedColorName,setSelectedColorName,newColorValue,setNewColorValue}) => {
   const id = parseInt(itemId-1)
-  console.log(id)
   const [showColorPicker, setShowColorPicker] = useState(false);
 
     

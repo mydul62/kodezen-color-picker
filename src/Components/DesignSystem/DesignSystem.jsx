@@ -14,6 +14,7 @@ import AddItemDrower from "../Drower/AddItemDrower";
 import EditItemDrower from "../Drower/EditItemDrower";
 import ItemCart from "../ItemCart/ItemCart";
 import { useState, useEffect, useRef } from "react";
+import ChangeGruopName from "../Modal/ChangeGruopName";
 const DesignSystem = () => {
   const [colors, setColors] = useState([
     { id: "1", name: "Black", value: "#000000" },
@@ -24,6 +25,7 @@ const DesignSystem = () => {
 
   const [editDrawer, setEditDrawer] = useState(false);
   const [drawer, setDrawer] = useState(false);
+  const [modal, setModal] = useState(false);
   const [itemId, setItemId] = useState();
   const [selectedColorName, setSelectedColorName] = useState();
   const [newColorValue, setNewColorValue] = useState();
@@ -59,6 +61,9 @@ const DesignSystem = () => {
   const handleDelete = (id) => {
     setColors(colors.filter((color) => color.id !== id));
   };
+  const  handleDeleteGruop =(id)=>{
+    setColorGroups(colorGroups.filter((item) => item.groupId !== id));
+  }
 
   const handleDuplicate = (id) => {
     const colorToDuplicate = colors.find((color) => color.id === id);
@@ -68,6 +73,17 @@ const DesignSystem = () => {
         ...colorToDuplicate,
         id: (colors.length + 1).toString(),
         name: `${colorToDuplicate.name}`,
+      },
+    ]);
+  };
+  const handleDuplicateGroup = (id) => {
+    const colorToDuplicate = colorGroups.find((item) => item.groupId === id);
+    setColorGroups([
+      ...colorGroups,
+      {
+        ...colorToDuplicate,
+        groupId: `${Date.now()}`,
+        groupName: `${colorToDuplicate.groupName}`,
       },
     ]);
   };
@@ -89,6 +105,9 @@ const DesignSystem = () => {
   const handleSetEditDrower = () => {
     setEditDrawer(false);
   };
+  const handleCloseModal = () => {
+    setModal(false);
+  };
 
   const dropdownRef = useRef(null);
 
@@ -104,6 +123,13 @@ const DesignSystem = () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
+  
+  const handleGroupNameChange = (id) => {
+  console.log(id)
+  }
+  
+  
+  
   return (
     <div className="kzui-settings">
       <div className="kzui-sidebar">
@@ -268,35 +294,33 @@ const DesignSystem = () => {
               <div className="kzui-grupe-title">
                 <h3>{group.groupName}</h3>
                 <div className="kzui-color-grupe-edit">
-                  <button className="kzui-group-dots ">
+                  <button 
+                  onClick={() =>setOpenMenuId(openMenuId === group.groupId ? null : group.groupId)}
+                  className="kzui-three-grpup-dots ">
                     <BsThreeDots size={14} />
                   </button>
-                  <div className={`kzui-group-dropdown`}>
+                  {openMenuId === group.groupId && (
+                  <div className={`kzui-group-dropdown`}  ref={dropdownRef}>
                     <button
-                    // onClick={()=>{
-                    // setEditDrawer(true)
-                    // setItemId(color.id)
-                    // setNewColorValue(color.value)
-                    // console.log(color.value)
-                    // setSelectedColorName(color.name)
-
-                    // console.log(color.name)
-                    // }}
+                    onClick={()=>{
+                    setModal(true);
+                    }}
                     >
                       <PiPencilThin /> <span>Rename</span>
                     </button>
                     <button
-                    // onClick={() => handleDuplicate(color.id)}
+                    onClick={() => handleDuplicateGroup(group.groupId)}
                     >
                       <HiOutlineDuplicate size={14} /> <span>Duplicate</span>
                     </button>
                     <button
-                    // onClick={() => handleDelete(color.id)}
+                    onClick={() => handleDeleteGruop(group.groupId)}
                     >
                       <RiDeleteBin6Line size={14} />
                       <span>Delete</span>
                     </button>
                   </div>
+                  )}
                 </div>
               </div>
               {group.items.map((color) => (
@@ -324,8 +348,6 @@ const DesignSystem = () => {
                         />
                       </div>
                       <div className="kzui-color-actions">
-                       
-                       
                       </div>
                     </div>
                   </div>
@@ -376,6 +398,7 @@ const DesignSystem = () => {
           handleCreateGroup={handleCreateGroup}
         ></ItemCart>
       </div>
+      <ChangeGruopName modal={modal} handleCloseModal={handleCloseModal} ></ChangeGruopName>
     </div>
   );
 };
